@@ -64,6 +64,7 @@ Rest the pointer in the middle of the menu bar and it glides down. Move away and
 | In Finder, right click an image or a text file, then Hang on Tendedero | Hang it on the line, pinned. |
 | Rest the pointer on a photo, with Zoom on hover on | See it larger in the middle of the screen. |
 | Rest the pointer in the middle of the menu bar | Bring the line down on that screen. |
+| Rest the pointer on the Tendedero icon in the menu bar | Bring the line down on that screen. |
 | Click anything in the menu bar | Put it away. |
 | <kbd>⌃</kbd>&thinsp;<kbd>⌥</kbd>&thinsp;<kbd>T</kbd> | Show or hide the line. Change it under Shortcut in the menu bar. |
 | <kbd>⌃</kbd>&thinsp;<kbd>⌥</kbd>&thinsp;<kbd>F</kbd> | Search the line. Change it under Shortcut in the menu bar. |
@@ -74,7 +75,9 @@ Rest the pointer in the middle of the menu bar and it glides down. Move away and
 
 Hand Tendedero your screenshots<sup>1</sup> and they skip the Desktop
 entirely. No floating thumbnail. No five-second wait. Each capture hangs
-the instant you take it, and only what you drag out is kept.
+the instant you take it, and only what you drag out is kept. How long the
+line stays down for a new capture is yours to choose, under Bring the
+line down in the menu bar: 1.5, 2.5, 5 or 10 seconds.
 
 Screen recordings hang there too, with a play button over them.
 Press and hold one to trim it.
