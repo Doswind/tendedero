@@ -1,0 +1,29 @@
+# Builds Tendedero.app for testing: run it from the Actions tab
+# (workflow_dispatch), or automatically on a pull request to main.
+# The built app is uploaded as an artifact, so it can be downloaded and
+# tried on a Mac without building locally. The app is signed ad hoc, like a
+# local build, so macOS asks again for Desktop access on first launch.
+name: Build test app
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check translations
+        run: swift scripts/check-strings.swift
+      - name: Build Tendedero.app
+        run: scripts/build-app.sh release
+      - name: Zip the app
+        run: ditto -c -k --keepParent build/Tendedero.app build/Tendedero.zip
+      - name: Upload the app
+        uses: actions/upload-artifact@v4
+        with:
+          name: tendedero-test-build
+          path: build/Tendedero.zip
+          retention-days: 7
