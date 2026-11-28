@@ -310,8 +310,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         alert.addButton(withTitle: L("Turn on"))
         alert.addButton(withTitle: L("Not now"))
         if let icon = NSImage(named: "Tendedero") ?? NSApp.applicationIconImage { alert.icon = icon }
-        let kinds: [(String, ReferenceWritableKeyPath<ClipboardWatcher.Type, Bool>)] = [
-            (L("Images"), \.imagesEnabled), (L("Text"), \.textEnabled), (L("Links"), \.linksEnabled),
+        // Key paths cannot refer to static members in Swift 6, so each kind
+        // carries a setter closure instead of a key path.
+        let kinds: [(String, (Bool) -> Void)] = [
+            (L("Images"), { ClipboardWatcher.imagesEnabled = $0 }),
+            (L("Text"), { ClipboardWatcher.textEnabled = $0 }),
+            (L("Links"), { ClipboardWatcher.linksEnabled = $0 }),
         ]
         let boxes = kinds.map { kind -> NSButton in
             let box = NSButton(checkboxWithTitle: kind.0, target: nil, action: nil)
@@ -321,7 +325,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         let login = Self.shouldOfferLogin ? NSButton(checkboxWithTitle: L("Open at login"), target: nil, action: nil) : nil
         login?.state = .on
         if login != nil { Self.loginOffered() }
-        let stack = NSStackView(views: boxes + (login.map { [$0] } ?? []))
+        var views: [NSView] = boxes
+        if let login { views.append(login) }
+        let stack = NSStackView(views: views)
         stack.orientation = .vertical
         stack.alignment = .leading
         stack.spacing = 6
@@ -331,7 +337,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         alert.accessoryView = stack
         NSApp.activate(ignoringOtherApps: true)
         if alert.runModal() == .alertFirstButtonReturn {
-            for (kind, box) in zip(kinds, boxes) { ClipboardWatcher.self[keyPath: kind.1] = box.state == .on }
+            for (kind, box) in zip(kinds, boxes) { kind.1(box.state == .on) }
             refreshClipboardWatcher()
         }
         if login?.state == .on { Self.openAtLogin() }
@@ -1071,18 +1077,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
 
     private func changeShortcut() {
-        record(\.current, register: registerShortcut, other: registerSearchShortcut,
+        record(get: { Shortcut.current }, set: { Shortcut.current = $0 },
+               register: registerShortcut, other: registerSearchShortcut,
                registered: { [weak self] in self?.hotKey != nil })
     }
 
     private func changeSearchShortcut() {
-        record(\.search, register: registerSearchShortcut, other: registerShortcut,
+        record(get: { Shortcut.search }, set: { Shortcut.search = $0 },
+               register: registerSearchShortcut, other: registerShortcut,
                registered: { [weak self] in self?.searchHotKey != nil })
     }
 
     /// Both shortcuts are off while recording, so pressing either one
     /// records it instead of showing or searching the line.
-    private func record(_ setting: ReferenceWritableKeyPath<Shortcut.Type, Shortcut?>,
+    private func record(get: @escaping () -> Shortcut?, set: @escaping (Shortcut?) -> Void,
                         register: @escaping () -> Void, other: @escaping () -> Void,
                         registered: @escaping () -> Bool) {
         hotKey = nil
@@ -1091,14 +1099,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             // The other one first, so taking its keys fails below.
             other()
             if let result {
-                let previous = Shortcut.self[keyPath: setting]
-                Shortcut.self[keyPath: setting] = result
+                let previous = get()
+                set(result)
                 register()
                 // Taken by another app, or by the other shortcut: keep the
                 // one that worked.
                 if result != nil && !registered() {
                     NSSound.beep()
-                    Shortcut.self[keyPath: setting] = previous
+                    set(previous)
                 }
             }
             register()
@@ -1245,17 +1253,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         // What you copy, in a section of its own: each kind is its own choice.
         menu.addItem(.separator())
         menu.addItem(.sectionHeader(title: L("Hang what you copy")))
-        let kinds: [(String, String, ReferenceWritableKeyPath<ClipboardWatcher.Type, Bool>)] = [
-            (L("Images"), L("Images you copy hang on the line too"), \.imagesEnabled),
-            (L("Text"), L("Text you copy hangs on the line too"), \.textEnabled),
-            (L("Links"), L("Links you copy hang on the line too"), \.linksEnabled),
+        // Key paths cannot refer to static members in Swift 6, so each kind
+        // carries getter and setter closures instead of a key path.
+        let kinds: [(String, String, () -> Bool, (Bool) -> Void)] = [
+            (L("Images"), L("Images you copy hang on the line too"), { ClipboardWatcher.imagesEnabled }, { ClipboardWatcher.imagesEnabled = $0 }),
+            (L("Text"), L("Text you copy hangs on the line too"), { ClipboardWatcher.textEnabled }, { ClipboardWatcher.textEnabled = $0 }),
+            (L("Links"), L("Links you copy hang on the line too"), { ClipboardWatcher.linksEnabled }, { ClipboardWatcher.linksEnabled = $0 }),
         ]
-        for (title, tip, key) in kinds {
+        for (title, tip, get, set) in kinds {
             let item = ClosureMenuItem(title) { [weak self] in
-                ClipboardWatcher.self[keyPath: key].toggle()
+                set(!get())
                 self?.refreshClipboardWatcher()
             }
-            item.state = ClipboardWatcher.self[keyPath: key] ? .on : .off
+            item.state = get() ? .on : .off
             item.toolTip = tip
             menu.addItem(item)
         }

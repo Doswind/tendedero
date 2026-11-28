@@ -48,7 +48,7 @@ final class SearchIndex {
         reading.insert(path)
         queue.async { [weak self] in
             let text = Self.recognize(url)
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
                 MainActor.assumeIsolated {
                     guard let self else { return }
                     self.reading.remove(path)

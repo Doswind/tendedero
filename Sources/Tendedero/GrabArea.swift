@@ -11,6 +11,7 @@ import SwiftUI
 ///
 /// Click copies, double click opens, press and hold opens Markup, the corner
 /// cross discards.
+@MainActor
 struct GrabArea: NSViewRepresentable {
     let item: Pegged
     let line: Line
