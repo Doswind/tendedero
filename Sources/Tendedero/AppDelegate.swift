@@ -81,17 +81,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
 
     /// How long a new capture stays down before it tucks away, in seconds.
-    /// The menu offers 1.5, 2.5, 5 and 10; 2.5 is the original behaviour.
-    /// A stored value of 0 or less means nothing was chosen yet.
+    /// The menu offers 1, 2.5, 5 and 10; 2.5 is the original behaviour.
+    /// A stored value that is not one of the choices falls back to 2.5.
     static var peekSeconds: TimeInterval {
         get {
             let saved = UserDefaults.standard.double(forKey: "peekSeconds")
-            return saved > 0 ? saved : 2.5
+            return Self.peekChoices.contains(saved) ? saved : 2.5
         }
         set { UserDefaults.standard.set(newValue, forKey: "peekSeconds") }
     }
 
-    static let peekChoices: [TimeInterval] = [1.5, 2.5, 5, 10]
+    static let peekChoices: [TimeInterval] = [1, 2.5, 5, 10]
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         let host = NSHostingView(rootView: LineView(line: line))
@@ -1293,7 +1293,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         let peekDurationItem = NSMenuItem(title: L("New capture stays down for"), action: nil, keyEquivalent: "")
         let peekDurations = NSMenu()
         for seconds in Self.peekChoices {
-            let item = ClosureMenuItem(String(format: L("%.g seconds"), seconds)) {
+            let item = ClosureMenuItem(String(format: L("%g seconds"), seconds)) {
                 AppDelegate.peekSeconds = seconds
             }
             item.state = Self.peekSeconds == seconds ? .on : .off

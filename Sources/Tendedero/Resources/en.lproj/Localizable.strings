@@ -47,7 +47,7 @@
 "When the pointer rests on the Tendedero icon" = "When the pointer rests on the Tendedero icon";
 "When something new hangs" = "When something new hangs";
 "New capture stays down for" = "New capture stays down for";
-"%.g seconds" = "%.g seconds";
+"%g seconds" = "%g seconds";
 "Over full screen apps" = "Over full screen apps";
 "Hang what you copy" = "Hang what you copy";
 "Hang what you copy too?" = "Hang what you copy too?";

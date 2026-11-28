@@ -43,6 +43,9 @@
 "Bring the line down" = "Faire descendre la corde";
 "When the pointer rests in the menu bar" = "Quand le pointeur reste dans la barre des menus";
 "When something new hangs" = "Quand une nouvelle capture s’accroche";
+"When the pointer rests on the Tendedero icon" = "Quand le pointeur reste sur l’icône Tendedero";
+"New capture stays down for" = "Durée de la nouvelle capture";
+"%g seconds" = "%g secondes";
 "Over full screen apps" = "Au-dessus des apps en plein écran";
 "Hang what you copy" = "Accrocher ce que vous copiez";
 "Hang what you copy too?" = "Accrocher aussi ce que vous copiez ?";

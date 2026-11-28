@@ -43,6 +43,9 @@
 "Bring the line down" = "Κατέβασμα του σχοινιού";
 "When the pointer rests in the menu bar" = "Όταν ο δείκτης παραμένει στη γραμμή μενού";
 "When something new hangs" = "Όταν κρεμιέται κάτι νέο";
+"When the pointer rests on the Tendedero icon" = "Όταν ο δείκτης παραμένει στο εικονίδιο του Tendedero";
+"New capture stays down for" = "Πόσο μένει κάτω ένα νέο στιγμιότυπο";
+"%g seconds" = "%g δευτερόλεπτα";
 "Over full screen apps" = "Πάνω από εφαρμογές πλήρους οθόνης";
 "Hang what you copy" = "Κρέμασμα όσων αντιγράφετε";
 "Hang what you copy too?" = "Να κρεμιούνται και όσα αντιγράφετε;";

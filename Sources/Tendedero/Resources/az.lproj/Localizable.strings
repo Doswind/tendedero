@@ -45,6 +45,9 @@
 "Bring the line down" = "İpi endir";
 "When the pointer rests in the menu bar" = "Göstərici menyu panelində dayananda";
 "When something new hangs" = "Yeni bir şey asılanda";
+"When the pointer rests on the Tendedero icon" = "Göstərici Tendedero işarəsində dayananda";
+"New capture stays down for" = "Yeni ekran şəkli nə qədər asılı qalsın";
+"%g seconds" = "%g saniyə";
 "Over full screen apps" = "Tam ekran proqramların üzərində";
 "Hang what you copy" = "Kopyaladıqlarını as";
 "Hang what you copy too?" = "Kopyaladıqlarını da as?";

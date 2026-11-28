@@ -43,6 +43,9 @@
 "Bring the line down" = "빨랫줄 내리기";
 "When the pointer rests in the menu bar" = "포인터가 메뉴 막대에 머무를 때";
 "When something new hangs" = "새 항목이 걸릴 때";
+"When the pointer rests on the Tendedero icon" = "포인터가 Tendedero 아이콘에 머무를 때";
+"New capture stays down for" = "새 스크린샷 표시 시간";
+"%g seconds" = "%g초";
 "Over full screen apps" = "전체 화면 앱 위에서도";
 "Hang what you copy" = "복사한 것 걸기";
 "Hang what you copy too?" = "복사한 것도 걸까요?";

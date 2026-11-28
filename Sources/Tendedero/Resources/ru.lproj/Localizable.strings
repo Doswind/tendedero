@@ -45,6 +45,9 @@
 "Bring the line down" = "Опускать верёвку вниз";
 "When the pointer rests in the menu bar" = "Когда курсор в строке меню";
 "When something new hangs" = "Когда подвешивается что-то новое";
+"When the pointer rests on the Tendedero icon" = "Когда курсор на значке Tendedero";
+"New capture stays down for" = "Как долго висит новый скриншот";
+"%g seconds" = "%g секунд";
 "Over full screen apps" = "Поверх полноэкранных приложений";
 "Hang what you copy" = "Что копируемое подвесить";
 "Hang what you copy too?" = "Что копируемое подвешивать ещё?";

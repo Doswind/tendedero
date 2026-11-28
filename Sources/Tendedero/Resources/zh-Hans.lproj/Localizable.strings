@@ -45,7 +45,7 @@
 "When the pointer rests on the Tendedero icon" = "指针停在 Tendedero 图标上时";
 "When something new hangs" = "有新内容挂上时";
 "New capture stays down for" = "新截图停留时长";
-"%.g seconds" = "%.g 秒";
+"%g seconds" = "%g 秒";
 "Over full screen apps" = "在全屏 App 上";
 "Hang what you copy" = "挂上复制的内容";
 "Hang what you copy too?" = "也挂上你复制的内容？";

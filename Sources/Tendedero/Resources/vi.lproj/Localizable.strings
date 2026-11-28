@@ -43,6 +43,9 @@
 "Bring the line down" = "Kéo dây phơi xuống";
 "When the pointer rests in the menu bar" = "Khi đặt con trỏ ở thanh menu";
 "When something new hangs" = "Khi có mục mới được treo";
+"When the pointer rests on the Tendedero icon" = "Khi đặt con trỏ lên biểu tượng Tendedero";
+"New capture stays down for" = "Ảnh chụp mới treo trên dây bao lâu";
+"%g seconds" = "%g giây";
 "Over full screen apps" = "Hiển thị đè lên ứng dụng toàn màn hình";
 "Hang what you copy" = "Treo nội dung đã sao chép";
 "Images" = "Hình ảnh";

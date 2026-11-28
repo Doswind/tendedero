@@ -43,6 +43,9 @@
 "Bring the line down" = "İpi indir";
 "When the pointer rests in the menu bar" = "İşaretçi menü çubuğunda durduğunda";
 "When something new hangs" = "Yeni bir şey asıldığında";
+"When the pointer rests on the Tendedero icon" = "İşaretçi Tendedero simgesinde durduğunda";
+"New capture stays down for" = "Yeni ekran görüntüsü ne kadar asılı kalsın";
+"%g seconds" = "%g saniye";
 "Over full screen apps" = "Tam ekran uygulamaların üzerinde";
 "Hang what you copy" = "Kopyaladıklarını as";
 "Hang what you copy too?" = "Kopyaladıklarını da as?";
